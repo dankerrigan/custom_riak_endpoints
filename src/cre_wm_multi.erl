@@ -23,7 +23,7 @@ init(_) ->
 
 service_available(ReqData, Context=#ctx{}) ->
     {
-      rj_config:is_enabled(),
+      true,
       ReqData,
       Context#ctx{
         bucket = wrq:path_info(bucket, ReqData),
@@ -51,14 +51,21 @@ resource_exists(ReqData, Context) ->
 %%% Internal functions
 
 ensure_objects(Context) ->
-    Results = build_results(Context#ctx.bucket, Context#ctx.keys, []),
+    KeyList = string:tokens(Context#ctx.keys, ","),
+    Results = build_results(Context#ctx.bucket, KeyList, []),
     Context#ctx{objects = Results}.
 
 build_results(Bucket, [Key|Rest], Results) ->
-    Value = get(client(), Bucket, Key),
+    Value = case get(client(), list_to_binary(Bucket), list_to_binary(Key)) of
+                {value, V} ->
+                    binary_to_list(V);
+                {error, Reason} ->
+                    Reason
+            end,
+
     build_results(Bucket, Rest, [{Key, Value}|Results]);
 build_results(_, [], Results) ->
-    mochijson2:encode({struct, Results}).
+    lists:flatten(mochijson:encode({struct, Results})).
 
 client() ->
     {ok,C} = riak:local_client(),

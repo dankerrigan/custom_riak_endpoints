@@ -14,7 +14,7 @@ bail() {
 
 ## help message
 declare -r HELP_MSG="
-Given a RiakJson source directory and a Riak source directory, moves beam files around for more rapid development
+Given a Riak source directory, moves beam files around for more rapid development
 
 Pre-Requisites: run 'make rel' on riak
 
@@ -56,7 +56,7 @@ echo "Cleaning Riak's custom_riak_endpoints ebin"
 rm ${riak_path}rel/riak/lib/custom_riak_endpoints-1/ebin/*
 
 echo "Copying new ebin"
-cp -R ebin/* ${riak_path}rel/riak/lib/riak_json-1/ebin/
+cp -R ebin/* ${riak_path}rel/riak/lib/custom_riak_endpoints-1/ebin/
 
 echo "Stopping Riak"
 bash ${riak_path}rel/riak/bin/riak stop

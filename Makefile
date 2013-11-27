@@ -10,13 +10,15 @@ nodeps:
 	./rebar skip_deps=true compile
 
 shortcut:
-	./bin/shortcut.sh $(riakpath)
+	./bin/shortcut.sh -r $(riakpath)
+
+test:
+	./bin/delete_objects.sh
+	./bin/put_objects.sh
+	./bin/get_objects.sh
 
 clean:
 	./rebar clean
 
 distclean: clean
 	./rebar delete-deps
-
-test: all cleantest
-	./rebar skip_deps=true eunit
