@@ -1,0 +1,15 @@
+%%-*- mode: erlang -*-
+{application, custom_riak_endpoints,
+ [
+  {description, "custom_riak_endpoints"},
+  {vsn, "1"},
+  {modules, []},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  riak_core,
+                  riak_kv
+                 ]},
+  {mod, { cre_app, []}}
+ ]}.
