@@ -27,3 +27,11 @@ make test
 
 * Modify `custom_riak_endpoints/src/cre_wm_multi.erl` to allow for multi object put
 * Modify `custom_riak_endpoints/src/cre_wm_multi.erl` to allow for multi object delete
+
+### Development Shortcuts
+
+In order to rapidly build and redeploy changes to the custom_riak_endpoints project without having to recompile all dependencies, it is possible to directly inject the relevant beam files into Riak's release directory:
+
+```
+make shortcut riakpath="~/src/erlang/riak/"
+```

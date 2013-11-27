@@ -12,7 +12,7 @@ nodeps:
 shortcut:
 	./bin/shortcut.sh -r $(riakpath)
 
-test:
+test: nodeps
 	./bin/delete_objects.sh
 	./bin/put_objects.sh
 	./bin/get_objects.sh
