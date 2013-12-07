@@ -17,6 +17,12 @@ git clone https://github.com/drewkerrigan/custom_riak_endpoints.git
 cd custom_riak_endpoints && make
 ```
 
+### Start Riak
+
+```
+../riak/rel/riak/bin/riak start
+```
+
 ### Test it out
 
 ```
@@ -35,3 +41,13 @@ In order to rapidly build and redeploy changes to the custom_riak_endpoints proj
 ```
 make shortcut riakpath="~/src/erlang/riak/"
 ```
+
+#### Debugging through old fashioned way, print statements
+
+Log debug statements:
+
+	lager:info("What happend? ~p~n", [HowDoesErlangEvenWork])
+
+Then watch the log:
+
+	tail -f ../riak/rel/riak/log/console.log
